@@ -1,0 +1,129 @@
+.post {
+    margin-top: 120px;
+    margin-bottom: 60px;
+    &-center {
+        width: 650px;
+        margin: auto;
+        @include mobile { 
+            top: 100px;    
+            width: 92%; 
+        }
+
+        & span {
+            font-size: 14px;
+        }
+    }
+
+    &-title {
+        margin-top: 12px;
+    }
+
+    &-content {
+        & img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 4px;
+        }
+    }
+
+    &-author {
+        display: flex;
+        text-align: center;
+        margin-top: 32px;
+        margin-bottom: 58px;
+        margin-left: 4px;
+
+        &-name {
+            display: flex;
+            flex-direction: column;
+            // align-items: center;
+            justify-content: center;
+
+            & span, h5 {
+                text-align: left;
+                font-size: 14px;
+            }
+        }
+    }
+
+    &-comment {
+
+        & form {
+            display: flex;
+            margin-top: 24px;
+            position: relative;
+            & input {
+                flex: 1;
+                padding: 8px;
+                padding-bottom: 32px;
+                border: 1px solid rgb(224, 224, 224);
+                border-radius: 8px;
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+
+            & button {
+                position:absolute;
+                bottom: -36px;
+                right: 8px;
+            }
+        }
+
+        & ul {
+            list-style-type: none;
+            margin-top: 56px;
+            & li {
+                display: flex;
+                margin-bottom: 16px;
+
+                & > section {
+                    flex: 1;
+                    border: 1px solid rgb(224, 224, 224);
+                    border-radius: 8px;
+                    padding: 12px;
+
+
+                    & > p {
+                        margin: 8px 0px;
+                    }
+
+                    & span  {
+                        color: rgb(172, 170, 170);
+                        font-weight: 400;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+
+    &-top {
+        position: fixed;
+        bottom: 8%;
+        right: 4%;
+        font-size: 48px;
+        color: #fff;
+        background-color: $primary-color;
+        padding: 4px;
+        border-radius: 50%;
+        opacity: 0.8;
+        
+        @include tablet {
+            bottom: 4%;
+        }
+
+        @include mobile {
+            bottom: 2%;
+            right: 2%;
+            font-size: 36px;
+        }
+
+        &:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        
+    }
+}

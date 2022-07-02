@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const SignUpMutation = gql`
+export const SIGN_UP = gql`
     mutation ($file: Upload, $signUpData: SignUpInput!) {
         SignUp (avatar: $file, signUpData: $signUpData) {
             user {
@@ -12,7 +12,7 @@ export const SignUpMutation = gql`
     }
 `
 
-export const SignInMutation = gql`
+export const SIGN_IN = gql`
     mutation ($signInData: SignInInput!) {
         SignIn (signInData: $signInData) {
             user {
@@ -24,7 +24,7 @@ export const SignInMutation = gql`
     }
 `
 
-export const AuthQuery = gql`
+export const AUTH = gql`
     query Auth {
         Auth {
             id
@@ -34,7 +34,7 @@ export const AuthQuery = gql`
     }
 `
 
-export const LogOutMutation = gql`
+export const LOG_OUT = gql`
     mutation {
         LogOut
     }

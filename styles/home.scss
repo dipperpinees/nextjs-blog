@@ -1,0 +1,47 @@
+.home {
+    &-posts {
+        display: flex;
+        padding: 48px;
+
+        & > section {
+            flex: 3;
+            margin-right: 32px;
+        }
+
+        & > aside {
+            flex: 1;
+
+            & > section {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 8px -8px;
+                & p {
+                    padding: 8px;
+                    margin: 8px;
+                    border: 1px solid rgb(221, 220, 220);
+                    border-radius: 4px;
+                    font-size: 14px;
+                }
+            }
+        }
+
+
+        &-tab {
+            width: 100%;
+            display: flex;
+            margin-bottom: 32px;
+            border-bottom: 0.5px solid rgb(230, 227, 227);
+
+            & a {
+                padding: 4px 8px;
+                margin-right: 32px;
+                font-weight: 500;
+                font-size: 14px;
+            }
+
+            &-select {
+                border-bottom: 2px solid $primary-color;
+            }
+        }
+    }
+}
