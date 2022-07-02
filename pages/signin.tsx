@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
-import { SignInMutation } from "../lib/apollo/auth";
+import { SIGN_IN } from "../lib/apollo/auth";
 import loadingStore from "../store/loadingStore";
 import userStore from "../store/userStore";
 
@@ -10,7 +10,7 @@ export interface ISignInProps {
 }
 
 export default function SignIn (props: ISignInProps) {
-  const [signInMutate] = useMutation(SignInMutation);
+  const [signInMutate] = useMutation(SIGN_IN);
   const router = useRouter();
   const setUser = userStore((state) => state.setUser);
   const setIsLoading = loadingStore((state) => state.setIsLoading);

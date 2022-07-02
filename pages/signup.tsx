@@ -2,14 +2,14 @@ import { useMutation } from '@apollo/client';
 import { Avatar, Button, IconButton, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
-import { SignUpMutation } from '../lib/apollo/auth';
+import { SIGN_UP } from '../lib/apollo/auth';
 import loadingStore from '../store/loadingStore';
 import userStore from '../store/userStore';
 
 export interface ISignUpProps {}
 
 export default function SignUp(props: ISignUpProps) {
-    const [signUpMutate] = useMutation(SignUpMutation);
+    const [signUpMutate] = useMutation(SIGN_UP);
     const inputFile = useRef<any>(null);
 	const setUser = userStore((state) => state.setUser);
     const [avatar, setAvatar] = useState<any>(null);
