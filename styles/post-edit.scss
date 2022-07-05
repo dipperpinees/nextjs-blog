@@ -17,11 +17,11 @@
         }
 
         &-category {
-            margin: 8px;
+            margin: 8px!important;
             min-width: 120px!important;
 
             @include mobile {
-                margin: 8px 0px;
+                margin: 8px 0px!important;
             }
         }
 
