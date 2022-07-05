@@ -1,10 +1,10 @@
 import { IPost } from "./post.interface";
 
 export interface IUser {
-    id: number;
+    id?: number;
     email?: string,
     password?: string;
-    name: string;
+    name?: string;
     avatar?: string;
     description?: string;
     work?: string;
