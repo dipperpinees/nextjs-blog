@@ -43,3 +43,9 @@ export const UNFOLLOW = gql`
         UnFollow(followingId: $id)
     }
 `
+
+export const UPDATE_AVATAR = gql`
+    mutation ($file: Upload!) {
+        UpdateAvatar(avatar: $file)
+    }
+`

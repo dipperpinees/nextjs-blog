@@ -14,7 +14,7 @@ export const CREATE_POST = gql`
     }
 `;
 
-export const HOME_POSTS = gql`
+export const FILTER_POSTS = gql`
     query ($filterData: FilterPostInput!) {
         FilterPost(filterData: $filterData) {
             docs {
@@ -34,6 +34,11 @@ export const HOME_POSTS = gql`
                     name
                     avatar
                 }
+            }
+            pagination {
+                totalDocs
+                totalPages
+                page
             }
         }
     }

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const SIGN_UP = gql`
-    mutation ($file: Upload, $signUpData: SignUpInput!) {
-        SignUp (avatar: $file, signUpData: $signUpData) {
+    mutation ($signUpData: SignUpInput!) {
+        SignUp (signUpData: $signUpData) {
             user {
                 id
                 name
