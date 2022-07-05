@@ -1,23 +1,47 @@
-import { Button } from '@mui/material';
+import { Button, Divider, useMediaQuery } from '@mui/material';
 import Link from 'next/link';
 import userStore from '../../../store/userStore';
 import ProfileMenu from './ProfileMenu';
 import styles from './styles.module.scss';
 import CreateIcon from '@mui/icons-material/Create';
+import SearchIcon from '@mui/icons-material/Search';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import SearchBar from './SearchBar';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export interface IHeaderProps {}
 
 export default function Header(props: IHeaderProps) {
     const user = userStore((state) => state.user);
+    const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
+    const router = useRouter();
+    // const isMobile = useMediaQuery('(max-width:480px)');
 
     return (
         <div className={styles.header}>
+            {showSearchBar && (
+                <SearchBar
+                    hideSearchBar={() => setShowSearchBar(false)}
+                    submitSearch={(value) => router.push(`/search?search=${value}`)}
+                />
+            )}
             <div>
                 <Link href="/">
-                    <a>LOGO</a>
+                    <a className={styles.logo}>
+                        <img src="/favicon.png" alt="logo" />
+                        <h2>
+                            <i>
+                                bl<span>o</span>gify
+                            </i>
+                        </h2>
+                    </a>
                 </Link>
             </div>
             <div className={styles.header__user}>
+                <SearchIcon className={styles.icon} onClick={() => setShowSearchBar(true)} />
+                {user && <NotificationsIcon className={styles.icon} />}
+                <Divider orientation="vertical" sx={{ margin: 1, height: 28 }} />
                 {user && (
                     <div>
                         <Link href="/post/edit">
@@ -25,22 +49,26 @@ export default function Header(props: IHeaderProps) {
                                 variant="outlined"
                                 size="medium"
                                 style={{ textTransform: 'none' }}
-                                color="success"
+                                className={styles.header__user__write}
                             >
-                                <CreateIcon sx={{marginRight: 1}}/> Viết bài
+                                <CreateIcon sx={{ marginRight: 1 }} /> Viết bài
                             </Button>
                         </Link>
                         <ProfileMenu user={user} />
                     </div>
                 )}
                 {!user && (
-                    <div>
-                        <Button size="medium">
-                            <Link href="/signin">Đăng nhập</Link>
-                        </Button>
-                        <Button variant="contained" size="medium">
-                            <Link href="/signup">Đăng ký</Link>
-                        </Button>
+                    <div className={styles.header__login}>
+                        <Link href="/signin">
+                            <Button size="medium" color="inherit">
+                                <h4>Đăng nhập</h4>
+                            </Button>
+                        </Link>
+                        <Link href="/signup">
+                            <Button variant="contained" size="medium">
+                                Đăng ký
+                            </Button>
+                        </Link>
                     </div>
                 )}
             </div>
