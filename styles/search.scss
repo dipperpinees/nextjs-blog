@@ -1,0 +1,27 @@
+.search {
+    margin: 100px 0px;
+
+    & > h2 {
+        text-align: center;
+        margin-bottom: 24px;
+        font-weight: 800;
+    }
+
+    & > ul {
+        list-style-type: none;
+        max-width: 960px;
+        margin: auto;
+        padding: 48px 28px;
+        padding-bottom: 16px;
+        border: 1px solid rgb(228, 227, 227);
+        border-radius: 4px;
+
+        @include tablet {
+            margin: 0px 36px
+        }
+
+        & > h4 {
+            padding-bottom: 28px;
+        }
+    }
+}
