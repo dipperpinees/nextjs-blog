@@ -7,6 +7,27 @@
         background-color: white;
         padding: 12px 16px;
         display: flex;
+
+        &-title {
+            flex: 1;
+            margin-right: 32px;
+            @include mobile {
+                margin-right: 0px;
+            }
+        }
+
+        &-category {
+            margin: 8px;
+            min-width: 120px;
+
+            @include mobile {
+                margin: 8px 0px;
+            }
+        }
+
+        @include mobile {
+            flex-direction: column;
+        }
     }
 }
 

@@ -1,13 +1,13 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import dynamic from 'next/dynamic';
-import SendIcon from '@mui/icons-material/Send';
-import { blue } from '@mui/material/colors';
-import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
+import SendIcon from '@mui/icons-material/Send';
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { blue } from '@mui/material/colors';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { CREATE_POST } from '../../lib/apollo/post';
 import { categoriesList } from '../../lib/category';
 import userStore from '../../store/userStore';
-import { useRouter } from 'next/router';
 
 const QuillEditor = dynamic(() => import('../../components/QuillEditor'), {
     ssr: false,
@@ -16,20 +16,13 @@ const QuillEditor = dynamic(() => import('../../components/QuillEditor'), {
 export default function EditPost() {
     const [content, setContent] = useState<string>('');
     const [createPostMutate] = useMutation(CREATE_POST);
-    const user = userStore((state) => state.user);
     const router = useRouter();
-
-    //if user's not logged in, navigate to login page
-    useEffect(() => {
-        if(!user) {
-            router.push("/signin")
-        }
-    }, [user])
+    const user = userStore((state) => state.user);
 
     const handleSubmitPost = async (e: any) => {
         e.preventDefault();
         try {
-            const data = await createPostMutate({
+            await createPostMutate({
                 variables: {
                     postData: {
                         title: e.target.title.value,
@@ -38,10 +31,10 @@ export default function EditPost() {
                     },
                 },
             });
-    
-            console.log(data);
-        } catch (e:any) {
-            console.log(e.message)
+
+            router.push(`/user/${user?.id}`);
+        } catch (e: any) {
+            console.log(e.message);
         }
     };
 
@@ -53,10 +46,13 @@ export default function EditPost() {
                     size="small"
                     variant="standard"
                     name="title"
-                    style={{ flex: 1, marginRight: 32 }}
+                    className="post-edit-topbar-title"
                     required
                 />
-                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                <FormControl
+                    size="small"
+                    className="post-edit-topbar-category"
+                >
                     <InputLabel id="category-select">Chủ đề</InputLabel>
                     <Select
                         labelId="category-select"
@@ -65,18 +61,14 @@ export default function EditPost() {
                         name="category"
                         required
                     >
-                        {categoriesList.map(({id, title}) => (
-                            <MenuItem key={id} value={id}>{title}</MenuItem>
+                        {categoriesList.map(({ id, title }) => (
+                            <MenuItem key={id} value={id}>
+                                {title}
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
-                <Button
-                    variant="contained"
-                    size="small"
-                    type="submit"
-                    startIcon={<SendIcon />}
-                    style={{ backgroundColor: blue['A200'] }}
-                >
+                <Button variant="contained" size="small" type="submit" startIcon={<SendIcon />}>
                     Xuất bản
                 </Button>
             </form>

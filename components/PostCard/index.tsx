@@ -31,14 +31,18 @@ export default function PostCard({
                         />
                     </div>
                     <div className={styles.post__info}>
-                        <span>{category.title}</span>
+                        <Link href={`/search?categoryId=${category.id}`}>
+                            <span>{category.title}</span>
+                        </Link>
                         <h3>{title}</h3>
                         <p>{description}...</p>
-                        <div className={styles.post__author}>
-                            <Avatar src={author?.avatar} sx={{ width: 28, height: 28 }} />
-                            <p>{author?.name}</p>
-                            <span>• {timeAgo(createdAt)}</span>
-                        </div>
+                        <Link href={`/user/${author?.id}`}>
+                            <div className={styles.post__author}>
+                                <Avatar src={author?.avatar} sx={{ width: 28, height: 28 }} />
+                                <p>{author?.name}</p>
+                                <span>• {timeAgo(createdAt)}</span>
+                            </div>
+                        </Link>
                     </div>
                     <span>
                         <RemoveRedEyeIcon sx={{ fontSize: 14 }} />

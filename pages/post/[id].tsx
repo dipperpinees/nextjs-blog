@@ -1,14 +1,16 @@
 import { useMutation } from '@apollo/client';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { Avatar, Button, Divider } from '@mui/material';
 import { NextPageContext } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import client from '../../lib/apollo/apollo-client';
 import { GET_POST_BY_ID, POST_COMMENT } from '../../lib/apollo/post';
+import useServerSideState from '../../lib/hook/useServerSideState';
 import { IPost } from '../../lib/interface/post.interface';
 import { timeAgo } from '../../lib/timeAgo';
 import userStore from '../../store/userStore';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 export interface IPostProps extends IPost {}
 
@@ -19,17 +21,12 @@ export default function Post({
     category,
     author,
     createdAt,
-    comments: commentsData,
+    comments: _comments,
 }: IPostProps) {
     const user = userStore((state) => state.user);
     const [PostComment] = useMutation(POST_COMMENT);
-    const [comments, setComments] = useState<any>(commentsData);
-    const [showScrollToTop, setShowScrollToTop] = useState(false);
-
-    const handleScroll = () => {
-        const position = window.pageYOffset;
-        setShowScrollToTop(position !== 0);
-    };
+    const [comments, setComments] = useServerSideState(_comments);
+    const [showScrollToTop, setShowScrollToTop] = useState<boolean>(false);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -39,6 +36,11 @@ export default function Post({
         };
     }, []);
 
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setShowScrollToTop(position !== 0);
+    };
+
     const handleSubmitComment = async (e: any) => {
         e.preventDefault();
         try {
@@ -46,6 +48,7 @@ export default function Post({
                 {
                     author: user,
                     content: e.target.content.value,
+                    createdAt: new Date().toISOString()
                 },
                 ...comments,
             ]);
@@ -64,12 +67,15 @@ export default function Post({
 
     return (
         <div className="post">
+            <Head>
+                <title>{title}</title>
+            </Head>
             <div className="post-center">
                 <span>{category.title}</span>
                 <h1 className="post-title">{title}</h1>
                 <Link href={`/user/${author?.id}`}>
                     <a className="post-author">
-                        <Avatar src={author?.avatar} sx={{ width: 56, height: 56 }} />
+                        <Avatar src={author?.avatar} sx={{ width: 56, height: 56, marginRight: 1 }} />
                         <div className="post-author-name">
                             <h5>{author?.name}</h5>
                             <span>{timeAgo(createdAt)}</span>
@@ -80,7 +86,7 @@ export default function Post({
                 <div dangerouslySetInnerHTML={{ __html: content }} className="post-content" />
                 <Divider sx={{ marginTop: 5, marginBottom: 5 }} />
                 <div className="post-comment">
-                    <h3>Bình luận ({comments.length})</h3>
+                    <h3>Bình luận ({comments?.length})</h3>
                     <form onSubmit={handleSubmitComment}>
                         <Avatar
                             src={user?.avatar}
@@ -122,7 +128,7 @@ export default function Post({
                     </ul>
                 </div>
             </div>
-
+            
             {showScrollToTop && <ArrowDropUpIcon className="post-top" onClick={() => window.scrollTo(0, 0)}/>}
         </div>
     );
