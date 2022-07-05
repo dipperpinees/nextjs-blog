@@ -1,11 +1,15 @@
 import { useMutation } from '@apollo/client';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { Avatar, Button } from '@mui/material';
 import { NextPageContext } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PostCard from '../../components/PostCard';
+import UploadAvatar from '../../components/UploadAvatar';
 import client from '../../lib/apollo/apollo-client';
 import { FOLLOW, UNFOLLOW, USER_PROFILE } from '../../lib/apollo/user';
+import useServerSideState from '../../lib/hook/useServerSideState';
 import { IUser } from '../../lib/interface/user.type';
 import userStore from '../../store/userStore';
 
@@ -19,14 +23,15 @@ export default function User({
     followerNumber: _followerNumber,
     followingNumber,
     posts,
-    isFollowed: _isFollowed
+    isFollowed: _isFollowed,
 }: IUserProps) {
     const user = userStore((state) => state.user);
     const [follow] = useMutation(FOLLOW);
     const [unFollow] = useMutation(UNFOLLOW);
     const router = useRouter();
-    const [followerNumber, setFollowerNumber] = useState<number>(_followerNumber || 0);
-    const [isFollowed, setIsFollowed] = useState(_isFollowed);
+    const [followerNumber, setFollowerNumber] = useServerSideState(_followerNumber);
+    const [isFollowed, setIsFollowed] = useServerSideState(_isFollowed);
+    const [updateAvatar, setUpdateAvatar] = useState(false)
 
     const handleFollow = async () => {
         try {
@@ -54,14 +59,20 @@ export default function User({
         } catch (e) {
             console.log(e);
         }
-    }
+    };
 
     return (
         <div className="user">
+            <Head>
+                <title>Trang cá nhân của {name}</title>
+            </Head>
             <div className="user-wallpaper"></div>
             <div className="user-main">
                 <div className="user-main-avatar">
-                    <Avatar src={avatar} />
+                    <Avatar src={user?.id === Number(id) ? user.avatar : avatar} />
+                    <Button color="inherit" onClick={() => setUpdateAvatar(true)}>
+                        <PhotoCamera />
+                    </Button>
                 </div>
                 <h3>{name}</h3>
                 <p>{description}</p>
@@ -78,7 +89,6 @@ export default function User({
                     ) : (
                         <Button
                             variant="contained"
-                            color="success"
                             className="user-main-button"
                             onClick={handleFollow}
                         >
@@ -107,6 +117,8 @@ export default function User({
                     ))}
                 </ul>
             </div>
+
+            {updateAvatar && <UploadAvatar onClose={() => setUpdateAvatar(false)}/>}
         </div>
     );
 }
