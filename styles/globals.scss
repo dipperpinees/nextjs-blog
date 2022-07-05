@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap');
 @import 'sign-up';
 @import 'sign-in';
 @import 'post-edit';
@@ -5,8 +6,7 @@
 @import 'post';
 @import 'home';
 @import 'user';
-// @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap');
+@import 'search';
 
 a {
     color: inherit;
@@ -32,9 +32,4 @@ a {
 
 #__next {
     margin-top: 56px;
-}
-
-.primary-button {
-    color: $primary-color;
-    border-color: $primary-color;
 }
