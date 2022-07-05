@@ -1,11 +1,28 @@
 .home {
+
     &-posts {
         display: flex;
-        padding: 48px;
 
+        @include desktop {
+            padding: 48px;
+        }
+
+        @include tablet {
+            padding: 36px;
+        }
+
+        @include mobile {
+            flex-direction: column;
+            padding: 20px;
+        }
+        
         & > section {
             flex: 3;
             margin-right: 32px;
+
+            @include mobile {
+                margin: 0;
+            }
         }
 
         & > aside {
@@ -15,16 +32,19 @@
                 display: flex;
                 flex-wrap: wrap;
                 margin: 8px -8px;
-                & p {
+                & a {
                     padding: 8px;
                     margin: 8px;
                     border: 1px solid rgb(221, 220, 220);
                     border-radius: 4px;
                     font-size: 14px;
+
+                    &:hover {
+                        background-color: rgb(235, 235, 235);
+                    }
                 }
             }
         }
-
 
         &-tab {
             width: 100%;
@@ -43,5 +63,76 @@
                 border-bottom: 2px solid $primary-color;
             }
         }
+    }
+}
+
+.banner {
+    height: 80vh;
+    width: 100%;
+    background-color: #B9EFD6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    
+    @include tablet {
+        height: 40vh;
+        padding: 0 4%;
+    }
+
+    @include mobile {
+        height: 60vh;
+        flex-direction: column;
+        padding: 24px;
+    }
+
+    & > img {
+
+        @include desktop {
+            height: 68%;
+        }
+
+        @include tablet {
+            height: 48%;
+        }
+
+        @include mobile {
+            width: 100%;
+        }
+    }
+
+    & h1 {
+        font-size: 40px;
+        font-weight: 900;
+        color: #0C472C;
+
+        @include tablet {
+            font-size: 32px;
+        }
+
+        @include mobile {
+            font-size: 32px;
+        }
+    }
+
+    & p {
+        margin: 12px 0px;
+        font-size: 24px;
+        font-weight: 600;
+
+        @include tablet {
+            font-size: 20px;
+        }
+
+        @include mobile {
+            font-size: 16px;
+        }
+    }
+    
+    & button {
+        margin-top: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 8px 16px;
     }
 }
