@@ -18,7 +18,7 @@
 
         &-category {
             margin: 8px;
-            min-width: 120px;
+            min-width: 120px!important;
 
             @include mobile {
                 margin: 8px 0px;
