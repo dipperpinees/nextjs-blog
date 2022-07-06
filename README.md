@@ -31,3 +31,4 @@ NEXT_PUBLIC_APOLLO_URI=FRONTEND_DOMAIN/graphql
 - CRUD articles
 - CRUD comments on articles
 - Follow other users
+- Seach & filter articles
