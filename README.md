@@ -1,9 +1,11 @@
 <p align="center">
-  <a href="https://www.hiepnguyen.site/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="BLOGIFY" /></a>
+  <a href="https://www.hiepnguyen.site/" target="blank"><img src="https://i.ibb.co/jLnn96z/B-2.png" width="200" alt="BLOGIFY" /></a>
 </p>
 <p align="center">A blog website using  <a href="https://nextjs.org/" target="_blank">Next.js</a> framework, <a href="https://www.apollographql.com/docs/react/" target="_blank">Apollo Client</a> and <a href="https://mui.com/" target="_blank">Material UI</a>.</p>
 
 ## <a href="https://www.hiepnguyen.site/">Demo</a>
+
+### <a href="https://github.com/hiepnguyen223/nestjs-blog">Back-end repository</a>
 
 ## Getting Started
 
