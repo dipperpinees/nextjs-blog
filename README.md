@@ -23,3 +23,11 @@ Fill env variables in `.env.local` file
 NEXT_PUBLIC_ENDPOINT=BACKEND_DOMAIN/graphql
 NEXT_PUBLIC_APOLLO_URI=FRONTEND_DOMAIN/graphql
 ```
+
+## Functionality overview
+
+**General functionality:**
+- Authenticate via JWT
+- CRUD articles
+- CRUD comments on articles
+- Follow other users
