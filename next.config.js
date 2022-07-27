@@ -19,6 +19,7 @@ const nextConfig = {
     sassOptions: {
         additionalData: `@import "/styles/common.scss";`,
     },
+    optimizeFonts: false
 };
 
 module.exports = nextConfig;
