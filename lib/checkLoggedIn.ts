@@ -15,7 +15,6 @@ export const checkLoggedIn = async (Cookie: string) => {
 
         return data.data.Auth;
     } catch (e: any) {
-        console.log(e);
         return null;
     }
 };
