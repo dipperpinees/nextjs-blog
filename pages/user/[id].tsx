@@ -70,9 +70,9 @@ export default function User({
             <div className="user-main">
                 <div className="user-main-avatar">
                     <Avatar src={user?.id === Number(id) ? user.avatar : avatar} />
-                    <Button color="inherit" onClick={() => setUpdateAvatar(true)}>
+                    {user?.id === Number(id) && <Button color="inherit" onClick={() => setUpdateAvatar(true)}>
                         <PhotoCamera />
-                    </Button>
+                    </Button>}
                 </div>
                 <h3>{name}</h3>
                 <p>{description}</p>
