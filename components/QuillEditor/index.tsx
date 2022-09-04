@@ -1,7 +1,7 @@
 import { ImageResize } from "quill-image-resize-module-ts";
 import { useRef } from "react";
 import ReactQuill, { Quill } from "react-quill";
-import client from "../../lib/apollo/apollo-client";
+import { client } from "../../lib/apollo";
 import { UPLOAD_IMAGE } from "../../lib/apollo/post";
 import loadingStore from "../../store/loadingStore";
 

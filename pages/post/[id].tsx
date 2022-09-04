@@ -5,10 +5,10 @@ import { NextPageContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import client from '../../lib/apollo/apollo-client';
-import { GET_POST_BY_ID, POST_COMMENT } from '../../lib/apollo/post';
+import { client } from '../../lib/apollo';
+import { GET_POST_BY_ID, POST_COMMENT } from '../../lib/apollo';
 import useServerSideState from '../../lib/hook/useServerSideState';
-import { IPost } from '../../lib/interface/post.interface';
+import { IPost } from '../../lib/type';
 import { timeAgo } from '../../lib/timeAgo';
 import userStore from '../../store/userStore';
 

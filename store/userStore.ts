@@ -1,5 +1,5 @@
 import create from "zustand";
-import { IUser } from "../lib/interface/user.type";
+import { IUser } from "../lib/type";
 
 interface UserState {
   user: IUser | null;

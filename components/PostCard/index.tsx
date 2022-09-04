@@ -1,5 +1,5 @@
 import { Avatar } from '@mui/material';
-import { IPost } from '../../lib/interface/post.interface';
+import { IPost } from '../../lib/type';
 import styles from './styles.module.scss';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Link from 'next/link';

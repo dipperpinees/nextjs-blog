@@ -15,7 +15,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, MouseEvent, useState } from 'react';
 import { LOG_OUT } from '../../../lib/apollo/auth';
-import { IUser } from '../../../lib/interface/user.type';
+import { IUser } from '../../../lib/type';
 import userStore from '../../../store/userStore';
 
 export interface IProfileMenuProps {

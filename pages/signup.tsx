@@ -2,8 +2,7 @@ import { useMutation } from '@apollo/client';
 import { Button, TextField } from '@mui/material';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
-import { SIGN_UP } from '../lib/apollo/auth';
+import { SIGN_UP } from '../lib/apollo';
 import loadingStore from '../store/loadingStore';
 import userStore from '../store/userStore';
 

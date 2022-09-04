@@ -1,4 +1,4 @@
-import client from "./apollo/apollo-client";
+import { client } from "./apollo";
 import { AUTH } from "./apollo/auth";
 
 export const checkLoggedIn = async (Cookie: string) => {

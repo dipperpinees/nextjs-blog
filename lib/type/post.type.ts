@@ -1,4 +1,4 @@
-import { IComment } from "./comment.interface";
+import { IComment } from "./comment.type";
 import { IUser } from "./user.type";
 
 export interface IPost {

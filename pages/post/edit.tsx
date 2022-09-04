@@ -1,11 +1,10 @@
 import { useMutation } from '@apollo/client';
 import SendIcon from '@mui/icons-material/Send';
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import { blue } from '@mui/material/colors';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { CREATE_POST } from '../../lib/apollo/post';
+import { CREATE_POST } from '../../lib/apollo';
 import { categoriesList } from '../../lib/category';
 import userStore from '../../store/userStore';
 

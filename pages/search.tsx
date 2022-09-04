@@ -3,11 +3,11 @@ import { NextPageContext } from 'next';
 import { useRouter } from 'next/router';
 import { ChangeEvent } from 'react';
 import PostCard from '../components/PostCard';
-import client from '../lib/apollo/apollo-client';
+import { client } from '../lib/apollo';
 import { FILTER_POSTS } from '../lib/apollo/post';
 import { categoriesList } from '../lib/category';
-import { IPagination } from '../lib/interface/pagination.interface';
-import { IPost } from '../lib/interface/post.interface';
+import { IPagination } from '../lib/type';
+import { IPost } from '../lib/type';
 
 export interface ISearchProps {
     posts: IPost[];

@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import PostCard from '../../components/PostCard';
 import UploadAvatar from '../../components/UploadAvatar';
-import client from '../../lib/apollo/apollo-client';
+import { client } from '../../lib/apollo';
 import { FOLLOW, UNFOLLOW, USER_PROFILE } from '../../lib/apollo/user';
 import useServerSideState from '../../lib/hook/useServerSideState';
-import { IUser } from '../../lib/interface/user.type';
+import { IUser } from '../../lib/type';
 import userStore from '../../store/userStore';
 
 export interface IUserProps extends IUser {}
