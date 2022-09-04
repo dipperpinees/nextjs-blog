@@ -27,7 +27,7 @@ NEXT_PUBLIC_APOLLO_URI=FRONTEND_DOMAIN/graphql
 ## Functionality overview
 
 **General functionality:**
-- Authenticate via JWT
+- Authenticate via JWT and HttpOnly Cookie
 - CRUD articles
 - CRUD comments on articles
 - Follow other users
