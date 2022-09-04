@@ -1,6 +1,5 @@
 import { Button, Divider, useMediaQuery } from '@mui/material';
 import Link from 'next/link';
-import userStore from '../../../store/userStore';
 import ProfileMenu from './ProfileMenu';
 import styles from './styles.module.scss';
 import CreateIcon from '@mui/icons-material/Create';
@@ -9,6 +8,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchBar from './SearchBar';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { userStore } from '../../../store';
 
 export interface IHeaderProps {}
 
@@ -16,7 +16,6 @@ export default function Header(props: IHeaderProps) {
     const user = userStore((state) => state.user);
     const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
     const router = useRouter();
-    // const isMobile = useMediaQuery('(max-width:480px)');
 
     return (
         <div className={styles.header}>

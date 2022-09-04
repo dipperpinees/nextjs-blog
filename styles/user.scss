@@ -107,6 +107,10 @@ $gray-color: rgb(92, 91, 91);
                     color: $gray-color;
                     font-weight: 700;
                 }
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { CREATE_POST } from '../../lib/apollo';
 import { categoriesList } from '../../lib/category';
-import userStore from '../../store/userStore';
+import { userStore } from '../../store';
 
 const QuillEditor = dynamic(() => import('../../components/QuillEditor'), {
     ssr: false,

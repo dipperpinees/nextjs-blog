@@ -17,8 +17,8 @@ export default function SearchBar({ hideSearchBar, submitSearch }: ISearchBarPro
     return (
         <div className={styles.search__bar}>
             <form onSubmit={handleSubmit}>
-                <Button>
-                    <ArrowBackIosIcon onClick={hideSearchBar} style={{ color: '#000' }}/>
+                <Button onClick={hideSearchBar}>
+                    <ArrowBackIosIcon style={{ color: '#000' }}/>
                 </Button>
                 <input type="text" placeholder="Tìm kiếm bài viết" name="search" />
                 <Button type="submit">

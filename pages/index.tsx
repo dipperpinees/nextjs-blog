@@ -10,7 +10,7 @@ import { IPagination } from '../lib/type';
 import { ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
-import userStore from '../store/userStore';
+import { userStore } from '../store';
 
 export interface IHomeProps {
     posts: IPost[];

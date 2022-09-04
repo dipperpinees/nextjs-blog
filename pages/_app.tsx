@@ -1,18 +1,19 @@
 import { ApolloProvider } from '@apollo/client';
+import { createTheme, ThemeProvider } from '@mui/material';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
+import Head from 'next/head';
+import NextNProgress from 'nextjs-progressbar';
 import { useEffect } from 'react';
+import 'react-quill/dist/quill.snow.css';
+import AlertSnackbar from '../components/Alert';
+import Layout from '../components/Layout';
 import Loading from '../components/Loading';
 import { client } from '../lib/apollo';
 import { checkLoggedIn } from '../lib/checkLoggedIn';
 import { IUser } from '../lib/type';
-import userStore from '../store/userStore';
+import { userStore } from '../store';
 import '../styles/globals.scss';
-import 'react-quill/dist/quill.snow.css';
-import Layout from '../components/Layout';
-import NextNProgress from 'nextjs-progressbar';
-import Head from 'next/head';
-import { createTheme, ThemeProvider } from '@mui/material';
 
 interface MyAppProps extends AppProps {
     user: IUser | null;
@@ -45,6 +46,7 @@ function MyApp({ Component, pageProps, user }: MyAppProps) {
                     <link rel="icon" type="image/x-icon" href="/favicon.png"></link>
                 </Head>
                 <Layout>
+                    <AlertSnackbar />
                     <Loading />
                     <NextNProgress />
                     <Component {...pageProps} />

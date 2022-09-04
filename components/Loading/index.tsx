@@ -1,6 +1,6 @@
-import { Box, CircularProgress } from "@mui/material";
-import loadingStore from "../../store/loadingStore";
-import styles from "./styles.module.scss"
+import { CircularProgress } from "@mui/material";
+import { loadingStore } from "../../store";
+import styles from "./styles.module.scss";
 
 export interface ILoadingProps {
 }

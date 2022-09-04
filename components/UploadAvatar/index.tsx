@@ -1,11 +1,10 @@
 import { useMutation } from '@apollo/client';
-import { Avatar, Button, Divider } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { Avatar, Button } from '@mui/material';
 import { useRef, useState } from 'react';
 import { UPDATE_AVATAR } from '../../lib/apollo/user';
-import loadingStore from '../../store/loadingStore';
-import userStore from '../../store/userStore';
+import { loadingStore, userStore } from '../../store';
 import styles from './styles.module.scss';
-import CloseIcon from '@mui/icons-material/Close';
 
 export interface IUploadAvatarProps {
     onClose: () => void;
@@ -36,7 +35,7 @@ export default function UploadAvatar({ onClose }: IUploadAvatarProps) {
                 },
             });
 
-            setUser({ ...user, avatar });
+            if (user) setUser({ ...user, avatar });
             onClose();
         } catch (e: any) {
             console.log(e.message);

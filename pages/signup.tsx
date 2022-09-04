@@ -3,8 +3,8 @@ import { Button, TextField } from '@mui/material';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { SIGN_UP } from '../lib/apollo';
-import loadingStore from '../store/loadingStore';
-import userStore from '../store/userStore';
+import { alertStore, userStore } from '../store';
+import { loadingStore } from '../store';
 
 export interface ISignUpProps {}
 
@@ -12,6 +12,7 @@ export default function SignUp(props: ISignUpProps) {
     const [signUpMutate] = useMutation(SIGN_UP);
     const setUser = userStore((state) => state.setUser);
     const setIsLoading = loadingStore((state) => state.setIsLoading);
+    const {setShowAlert, setAlertMessage} = alertStore((state) => state);
     const router = useRouter();
 
     const signUp = async (e: any) => {
@@ -32,7 +33,10 @@ export default function SignUp(props: ISignUpProps) {
             });
             setUser(user);
             router.push('/');
-        } catch (e) {}
+        } catch (e: any) {
+            setShowAlert(true);
+            setAlertMessage("error", e.message);
+        }
         setIsLoading(false);
     };
 

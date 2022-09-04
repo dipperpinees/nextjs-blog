@@ -10,7 +10,7 @@ import { GET_POST_BY_ID, POST_COMMENT } from '../../lib/apollo';
 import useServerSideState from '../../lib/hook/useServerSideState';
 import { IPost } from '../../lib/type';
 import { timeAgo } from '../../lib/timeAgo';
-import userStore from '../../store/userStore';
+import { userStore } from '../../store';
 
 export interface IPostProps extends IPost {}
 

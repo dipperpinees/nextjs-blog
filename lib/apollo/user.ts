@@ -49,3 +49,29 @@ export const UPDATE_AVATAR = gql`
         UpdateAvatar(avatar: $file)
     }
 `
+export const GET_FOLLOWERS = gql`
+    query ($id: Int!) {
+        GetUserById (id: $id) {
+            id
+            follower {
+                id
+                name
+                avatar
+            }
+        }
+        
+    }
+`
+export const GET_FOLLOWINGS = gql`
+    query ($id: Int!) {
+        GetUserById (id: $id) {
+            id
+            following {
+                id
+                name
+                avatar
+            }
+        }
+        
+    } 
+`

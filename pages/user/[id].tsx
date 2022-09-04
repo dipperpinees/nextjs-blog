@@ -5,13 +5,14 @@ import { NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import FollowList from '../../components/FollowList';
 import PostCard from '../../components/PostCard';
 import UploadAvatar from '../../components/UploadAvatar';
 import { client } from '../../lib/apollo';
 import { FOLLOW, UNFOLLOW, USER_PROFILE } from '../../lib/apollo/user';
 import useServerSideState from '../../lib/hook/useServerSideState';
 import { IUser } from '../../lib/type';
-import userStore from '../../store/userStore';
+import { userStore } from '../../store';
 
 export interface IUserProps extends IUser {}
 
@@ -31,7 +32,9 @@ export default function User({
     const router = useRouter();
     const [followerNumber, setFollowerNumber] = useServerSideState(_followerNumber);
     const [isFollowed, setIsFollowed] = useServerSideState(_isFollowed);
-    const [updateAvatar, setUpdateAvatar] = useState(false)
+    const [updateAvatar, setUpdateAvatar] = useState<boolean>(false);
+    const [showFollower, setShowFollower] = useState<boolean>(false);
+    const [showFollowing, setShowFollowing] = useState<boolean>(false);
 
     const handleFollow = async () => {
         try {
@@ -39,11 +42,11 @@ export default function User({
                 router.push('/signin');
                 return;
             }
+            setIsFollowed(true);
+            setFollowerNumber(followerNumber + 1);
             await follow({
                 variables: { id },
             });
-            setIsFollowed(true);
-            setFollowerNumber(followerNumber + 1);
         } catch (e) {
             console.log(e);
         }
@@ -51,28 +54,40 @@ export default function User({
 
     const handleUnFollow = async () => {
         try {
+            setIsFollowed(false);
+            setFollowerNumber(followerNumber - 1);
             await unFollow({
                 variables: { id },
             });
-            setIsFollowed(false);
-            setFollowerNumber(followerNumber - 1);
         } catch (e) {
             console.log(e);
         }
     };
 
+    const handleShowFollower = () => {
+        if (followerNumber <= 0) return;
+        setShowFollower(true);
+    }
+
+    const handleShowFollowing = () => {
+        if (followingNumber <= 0) return;
+        setShowFollowing(true);
+    }
+
     return (
         <div className="user">
             <Head>
-                <title>Trang cá nhân của {name}</title>
+                <title>{`Trang cá nhân của ${name}`} </title>
             </Head>
             <div className="user-wallpaper"></div>
             <div className="user-main">
                 <div className="user-main-avatar">
                     <Avatar src={user?.id === Number(id) ? user.avatar : avatar} />
-                    {user?.id === Number(id) && <Button color="inherit" onClick={() => setUpdateAvatar(true)}>
-                        <PhotoCamera />
-                    </Button>}
+                    {user?.id === Number(id) && (
+                        <Button color="inherit" onClick={() => setUpdateAvatar(true)}>
+                            <PhotoCamera />
+                        </Button>
+                    )}
                 </div>
                 <h3>{name}</h3>
                 <p>{description}</p>
@@ -96,11 +111,11 @@ export default function User({
                         </Button>
                     ))}
                 <div className="user-main-follow">
-                    <div>
+                    <div onClick={handleShowFollower}>
                         <span>FOLLOWER</span>
                         {followerNumber}
                     </div>
-                    <div>
+                    <div onClick={handleShowFollowing}>
                         <span>FOLLOWING</span>
                         {followingNumber}
                     </div>
@@ -117,8 +132,23 @@ export default function User({
                     ))}
                 </ul>
             </div>
-
-            {updateAvatar && <UploadAvatar onClose={() => setUpdateAvatar(false)}/>}
+            {showFollower && (
+                <FollowList
+                    onClose={() => setShowFollower(false)}
+                    id={id}
+                    type="Follower"
+                    isOwn={user?.id === id}
+                />
+            )}
+            {showFollowing && (
+                <FollowList
+                    onClose={() => setShowFollowing(false)}
+                    id={id}
+                    type="Following"
+                    isOwn={user?.id === id}
+                />
+            )}
+            {updateAvatar && <UploadAvatar onClose={() => setUpdateAvatar(false)} />}
         </div>
     );
 }
@@ -137,7 +167,6 @@ export async function getServerSideProps(context: NextPageContext) {
             props: { ...user },
         };
     } catch (e: any) {
-        console.log(e.message);
         return {
             redirect: {
                 destination: '/404',
